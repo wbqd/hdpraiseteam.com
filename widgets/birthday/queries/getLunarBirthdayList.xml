@@ -1,0 +1,27 @@
+<query id="getLunarBirthdayList" action="select">
+    <tables>
+        <table name="member" alias="member"/>
+        <table name="lunar_birthday" alias="lunar_birthday" type="left join">
+            <conditions>
+                <condition operation="equal" column="lunar_birthday.member_srl" default="member.member_srl" />
+            </conditions>
+        </table>
+    </tables>
+    <columns>
+        <column name="*" />
+        <column name="member.member_srl" alias="member_srl" />
+    </columns>
+    <conditions>
+        <group>
+            <condition operation="equal" column="RIGHT(lunar_birthday.lunar_birthday, 4)" var="lunar_day" />
+            <condition operation="equal" column="lunar_birthday.leap" var="leap" pipe="and" />
+        </group>
+        <group pipe="or">
+            <condition operation="null" column="lunar_birthday.lunar_birthday" default="null" />
+            <condition operation="equal" column="RIGHT(member.birthday, 4)" var="solar_day" pipe="and" />
+        </group>
+    </conditions>
+    <navigation>
+        <index var="sort_index" default="user_name" order="asc" />
+    </navigation>
+</query>

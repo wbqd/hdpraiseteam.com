@@ -1,0 +1,50 @@
+::-webkit-scrollbar-thumb:hover,
+.dropdown-menu .badge,
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-submenu:hover>a, .dropdown-submenu:focus>a,
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus,
+.dropdown-submenu>.active>a, .dropdown-submenu>.active>a:hover, .dropdown-submenu>.active>a:focus,
+#popup_menu_area a:hover, #popup_menu_area a:active, #popup_menu_area a:focus,
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus,
+.sidebar .list-group-item.active, .sidebar .list-group-item.active:hover, .sidebar .list-group-item.active:focus,
+.sidebar .list-group-item:hover, .sidebar .list-group-item:focus{background-color:{$colorset_cc};color:#fff}
+.sidebar .list-group-item.active, .sidebar .list-group-item.active:hover, .sidebar .list-group-item.active:focus,
+.sidebar .list-group-item:hover, .sidebar .list-group-item:focus{background-color:{$colorset_cc} !important}
+.sidebar .list-group-item.active a, .sidebar .list-group-item.active:hover a, .sidebar .list-group-item.active:focus a,
+.sidebar .list-group-item:hover a, .sidebar .list-group-item:focus a{color:#fff}
+.sidebar .list-group-item:hover a>span[style], .sidebar .list-group-item:focus a>span[style]{color:#fff !important}
+.sidebar .list-group-item.active, .sidebar .list-group-item.active:hover, .sidebar .list-group-item.active:focus,
+.sidebar .list-group-item:hover, .sidebar .list-group-item:focus{border-color:{$colorset_cc}}
+.nav-pills>li>a,
+a..list-group-item.active>.badge,
+.dropdown-menu>li:hover>a>.badge{color:{$colorset_cc}}
+.nav-pills>li>a>.badge{background-color:{$colorset_cc};color:#fff}
+.nav-pills>.active>a>.badge{background-color:#fff;color:{$colorset_cc}}
+.form-control:focus{border-color:{$colorset_cc};-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);box-shadow:inset 0 1px 1px rgba(0,0,0,0.075)}
+*:focus{outline-color:{$colorset_cc}!important}
+<block cond="$li->border_radius=='N'">::-webkit-scrollbar-thumb,.panel,.btn,.nav-pills>li>a,.badge,select,textarea,.form-control,.tooltip-inner,.dropdown-menu,.list-group-item,.pagination>li>a,.modal-content,.img-profile{border-radius:0 !important}</block>
+<block cond="$li->box_shadow=='N'">#navbar,.panel,div.xe_mobile,.footer,.dropdown-menu,div#popup_menu_area{box-shadow:none}.navbar .dropdown-menu{border:1px solid #e7e7e7;border-top:0;border-color:rgba(232,232,232,.5)}</block>
+<block cond="$li->navbar_fixed=='N'">
+body{padding-top:0}#navbar{margin-bottom:0}#navbar+#jumbotron{margin-top:0}
+</block>
+<block cond="$li->jumbotron=='N' && $li->navbar_fixed!='N'">
+body{padding-top:60px}
+</block>
+<block cond="$li->navbar_color!='inverse'">
+.navbar-nav>.active>a, .navbar-nav>.active>a:hover, .navbar-nav>.active>a:focus,
+.navbar-nav>.open>a,.navbar-nav>.open>a:hover,.navbar-nav>.open>a:focus{color:#555555;background-color:#eee}
+</block>
+<block cond="$li->code_prettify=='Y'">
+.com{color:#93a1a1}.lit{color:#195f91}.pun,.opn,.clo{color:#93a1a1}.fun{color:#dc322f}.str,.atv{color:#D14}.kwd,.prettyprint .tag{color:#1e347b}.typ,.atn,.dec,.var{color:teal}.pln{color:#48484c}ol.linenums{margin:0 0 0 -10px}ol.linenums li{padding-left:12px;color:#bebec5;line-height:20px;text-shadow:0 1px 0 #fff}
+</block>
+<block cond="$li->navbar_sm_dropdown=='Y'">
+@media(max-width:768px){
+#navbar .navbar-nav>li>.dropdown-menu{display:block;position:static;float:none;width:auto;margin-top:0;background-color:transparent;border:0;box-shadow:none;}
+#navbar.navbar-default .navbar-nav .dropdown-menu>li>a{color:#777;}
+#navbar.navbar-inverse .navbar-nav .dropdown-menu>li>a{color:#ccc}
+#navbar .navbar-nav .dropdown-menu>.active>a{color:#fff !important}
+#navbar .navbar-nav .dropdown-menu>li>a{line-height:20px}
+#navbar .navbar-nav .dropdown-menu>li>a,
+#navbar .navbar-nav .dropdown-menu .dropdown-header{padding:5px 15px 5px 25px}
+}
+</block>
+#modal-login .modal-dialog{margin-left:auto;margin-right:auto}

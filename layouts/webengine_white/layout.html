@@ -1,0 +1,180 @@
+<!--// Default Loads -->
+<load target="./js/jquery.cookie.js" />
+<load target="./js/script.js" />
+<load target="./css/style.css" />
+
+<script type="text/javascript" cond="$XE_VALIDATOR_MESSAGE">
+	jQuery(function($){
+		$.layout_alert("{$XE_VALIDATOR_MESSAGE}", "{$XE_VALIDATOR_MESSAGE_TYPE}");
+	});
+</script>
+<style type="text/css">
+	.gnb_a_hover_color
+</style>
+<div id="layout">
+	<div id="layout_head">
+		<div class="layout_width">
+			<div class="layout_head_padding">
+				<h1 class="logo">
+					<a href="{($layout_info->site_url)?$layout_info->site_url:getUrl()}"><img src="{$layout_info->logo_image}" alt="{($layout_info->site_name)?$layout_info->site_name:'사이트 로고'}" /></a>
+				</h1>
+				<ul id="gnb">
+					<li loop="$main_menu->list=>$key1,$val1" class="depth1_li<!--@if($val1['selected'])--> selected<!--@end-->" cond="$val1['link'] || $val1['href']">
+						<div class="depth1_div">
+							<a class="depth1_a" href="{$val1['href']}" target="_blank"|cond="$val1['open_window']=='Y'">
+								{$val1['link']}
+								<span class="depth1_arrow border"></span>
+								<span class="depth1_arrow bg"></span>
+							</a>
+						</div>
+						<ul class="depth1_sub" cond="$val1['list']">
+							<li class="depth2_li" loop="$val1['list']=>$key2, $val2" cond="$val2['link'] || $val2['href']">
+								<a class="depth2_a" href="{$val2['href']}" target="_blank"|cond="$val2['open_window']=='Y'">
+									{$val2['link']}
+									<span class="depth2_arrow border"></span>
+									<span class="depth2_arrow bg"></span>
+								</a>
+								<ul class="depth2_sub" cond="$val2['list']">
+									<li class="depth3_li" loop="$val2['list']=>$key3, $val3" cond="$val3['link'] || $val3['href']">
+										<a class="depth3_a" href="{$val3['href']}" target="_blank"|cond="$val3['open_window']=='Y'">
+										    {$val3['link']}
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	<div id="layout_sub">
+	</div>
+	<div class="layout_width">
+		<div id="layout_bannertop">{$layout_info->bannertop_content}</div>
+		<div id="layout_banner">
+			<div id="banner_frame">
+				<div id="banner_imgs">
+					{@ $idx = 0}
+					<!--@foreach($banner_menu->list as $key=>$val)-->
+						<div class="banner_obj banner_obj_{$idx}<!--@if(($idx == 0 && !isset($_COOKIE['ww_banner_img'])) || $idx == $_COOKIE['ww_banner_img'])--> selected" style="display:block;<!--@end-->">
+							<a href="{$val['href']}"><img src="{$val['normal_btn']}" alt="{$val['text']}" /></a>
+							{@ $idx++}
+						</div>
+					<!--@end-->
+				</div>
+				<div id="banner_control" class="hidden"|cond="$layout_info->banner_control_visible == 'N' || $idx <= 1">
+					<div id="banner_left_control" class="control"><span></span></div>
+					<div id="banner_right_control" class="control"><span></span></div>
+				</div>
+				<div id="banner_loading" class="hidden"|cond="$layout_info->banner_timebar_visible == 'N' || $idx <= 1" style="width:{$_COOKIE['ww_banner_rest']}px;"|cond="$_COOKIE['ww_banner_rest']"></div>
+			</div>
+			<div id="banner_right">
+				<block cond="!$is_logged">
+					<form id="layout_login" action="{getUrl()}" method="post" ruleset="@login">
+						<input type="hidden" name="success_return_url" value="{getRequestUriByServerEnviroment()}" />
+						<input type="hidden" name="act" value="procMemberLogin" />
+						<div class="box">
+							<input id="user_id" class="l_gradient" name="user_id" type="text" />
+							<input id="user_pw" class="l_gradient" name="password" type="password" />
+						</div>
+						<input id="layout_login_submit" class="submit l_gradient" type="button" value="{$lang->cmd_login}" />
+						<!--// <div class="submit" onclick="document.getElementById('layout_login').submit()">{$lang->cmd_login}</div>-->
+						<div class="clear"></div>
+						<div class="line" style="margin:0 0 4px 0;">
+							<input type="checkbox" id="layout_keep" name="keep_signed" data-msg="{$lang->about_keep_signed}" />
+							<label id="layout_keep_label" for="layout_keep">{$lang->keep_signed} <span class="off">Off</span></label>
+							<a href="{getUrl('act','dispMemberSignUpForm')}" class="fright">{$lang->cmd_signup}</a>
+							<div class="clear"></div>
+						</div>
+						<div class="line">
+							<a href="{getUrl('act','dispMemberFindAccount')}" class="fleft">{$lang->cmd_find_member_account}</a>
+							<a href="{getUrl('act','dispMemberResendAuthMail')}" class="fright">{$lang->cmd_resend_auth_mail}</a>
+							<div class="clear"></div>
+						</div>
+					</form>
+				</block>
+				<block cond="$is_logged">
+					<div id="layout_login">
+						<div class="nickline">
+							<a href="#popup_menu_area" class="nickname member_{$logged_info->member_srl}" onclick="return false">{$logged_info->nick_name}</a>
+							<a class="fright" cond="$logged_info->is_admin == 'Y'" href="{getUrl('', 'module','admin')}" target="_blank">[{$lang->cmd_management}]</a>
+							<div class="clear"></div>
+						</div>
+						<ul class="member_menu">
+							{@
+								$member_menu = array(
+									"dispMemberInfo"=>$lang->cmd_view_member_info,
+									"dispMemberScrappedDocument"=>$lang->cmd_view_scrapped_document,
+									"dispMemberSavedDocument"=>$lang->cmd_view_saved_document,
+									"dispMemberOwnDocument"=>$lang->cmd_view_own_document,
+									"dispCommunicationFriend"=>$lang->cmd_view_friend,
+									"dispCommunicationMessages"=>$lang->cmd_view_message_box,
+									"dispMemberLogout"=>$lang->cmd_logout
+								);
+								$idx=0
+							}
+							<li loop="$member_menu=>$key,$val" class="menu fleft"|cond="!($idx%2)" class="menu fright"|cond="$idx%2">
+								<a href="{getUrl('act',$key)}">
+									{$val}
+									<em class="border"></em>
+								</a>
+								{@ $idx++}
+							</li>
+							<li class="clear"></li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+				</block>
+				<div id="login_bottom">
+					<form id="layout_search" action="{getUrl()}" method="post">
+					    <input type="hidden" name="vid" value="{$vid}" cond="$vid" />
+						<input type="hidden" name="mid" value="{$mid}" />
+						<input type="hidden" name="act" value="IS" />
+						<input type="hidden" name="search_target" value="title_content" />
+						<input type="text" class="l_gradient" name="is_keyword" id="layout_searchText" value="{$is_keyword}" />
+						<input type="submit" class="l_gradient" id="layout_searchSubmit" value="검색" />
+					</form>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div id="layout_bannerbottom">{$layout_info->bannerbottom_content}</div>
+		<div id="layout_body">
+			{$content}
+			<div class="clear"></div>
+		</div>
+    	<div id="layout_mainbottom">{$layout_info->mainbottom_content}</div>
+		<div id="layout_foot">
+			<div id="sitemap">
+				<block loop="$bottom_menu->list=>$key1,$val1" cond="$val1['link'] || $val1['link']">
+					<div class="section">
+						<a class="topdepth l_gradient" href="{$val1['href']}">
+							{$val1['link']}
+							<span></span>
+							<em></em>
+						</a>
+						<ul cond="$val1['list']">
+							<li loop="$val1['list']=>$key2,$val2" cond="$val2['link'] || $val2['link']">
+								<a href="{$val2['href']}">{$val2['link']}</a>
+							</li>
+						</ul>
+					</div>
+				</block>
+				<div class="clear"></div>
+			</div>
+			<div id="footer">
+				<div id="footContent" class="fleft">
+					{$layout_info->foot_content}
+				</div>
+				<div id="copyright" class="fright">
+					{$layout_info->copyright}
+				</div>
+				<div class="clear"></div>
+				<div id="designed_by"><a href="http://www.webengine.co.kr">Designed by WebEngine.</a></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="layout_alert"></div>

@@ -1,0 +1,92 @@
+<!--%import("./style.css")-->
+{@
+  $sColor = $widgetstyle_extra_var->ws_startcolor;
+  $eColor = $widgetstyle_extra_var->ws_endcolor;
+  $ifColor = false;
+}
+<!--@if($sColor && $eColor)-->
+  <!--@if(preg_match('/^[\(\),#a-grA-G0-9]+$/', $sColor) && preg_match('/^[\(\),#a-grA-G0-9]+$/', $eColor))-->
+    {@
+      $ifColor = true;
+      $wColor = array($sColor,$eColor);
+    }
+    <!--@for($i=0;$i<2;$i++)-->
+      <!--@if($wColor[$i])-->
+        <!--@if(substr($wColor[$i],0,4) == "rgba")-->
+          <div class="message error">
+            <p>
+              <b>Nico Widget Style</b><br/>
+              그라데이션 색상에 rgba는 사용이 불가능합니다.
+            </p>
+          </div>
+        <!--@else if(substr($wColor[$i],0,3) == "rgb")-->
+          {@
+            $temp = split(",",str_replace("rgb","",str_replace(")","",str_replace("(","",$wColor[$i]))));
+            $wColor[$i] = "#";
+          }
+          <!--@for($j=0;$j<3;$j++)-->
+            {@ $temp2 = dechex($temp[$j])}
+            <!--@if(strlen($temp2) == 1)-->
+              {@ $temp2 = "0".$temp2}
+            <!--@end-->
+            {@$wColor[$i] .= $temp2}
+          <!--@end-->
+        <!--@else if(substr($wColor[$i],0,1) == "#" && strlen($wColor[$i]) == 4)-->
+          {@ $temp = array()}
+          <!--@for($j=0;$j<4;$j++)-->
+            {@ $temp[$j] = substr($wColor[$i],$j,1)}
+          <!--@end-->
+          {@
+            $wColor[$i] = "#";
+          }
+          <!--@for($j=1;$j<4;$j++)-->
+            {@ $wColor[$i] .= $temp[$j].$temp[$j]}
+          <!--@end-->
+        <!--@end-->
+      <!--@end-->
+    <!--@end-->
+  <!--@else-->
+    <div class="message error">
+      <p>
+        <b>Nico Widget Style</b><br/>
+        색상 형식이 잘못되었습니다.<br /><br />
+        RGB : rgb(0,0,0)<br />
+        색상명 : black<br />
+        16진수 : #000000<br />
+        16진수 단축 : #000
+      </p>
+    </div>
+  <!--@end-->
+<!--@else if($sColor || $eColor)-->
+  <div class="message error">
+    <p>
+      <b>Nico Widget Style</b><br/>
+      그라데이션 색상은 위쪽 색상과 아래쪽 색상을 모두 적어주셔야 합니다.
+    </p>
+  </div>
+<!--@end-->
+<div class="ws_nico">
+  <div class="css3pie ws_nico_title" style="<!--@if($ifColor)-->
+  background:{$wColor[1]};
+  filter:progid:DXImageTransform.Microsoft.gradient(StartColorStr=#ffffff,EndColorStr={$wColor[1]},GradientType=0);
+  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#fff), to({$wColor[1]}));
+  background:-webkit-linear-gradient({$wColor[0]}, {$wColor[1]});
+  background:-moz-linear-gradient({$wColor[0]}, {$wColor[1]});
+  background:-ms-linear-gradient({$wColor[0]}, {$wColor[1]});
+  background:-o-linear-gradient({$wColor[0]}, {$wColor[1]});
+  background:linear-gradient({$wColor[0]}, {$wColor[1]});
+  <!--@end--><!--@if($widgetstyle_extra_var->ws_bordercolor)-->border-color:{$widgetstyle_extra_var->ws_bordercolor};<!--@end-->">
+    <!--@if($widgetstyle_extra_var->ws_title_link)-->
+      <a href="{$widgetstyle_extra_var->ws_title_link}" target="_blank">
+      <!--@end-->
+        {$widgetstyle_extra_var->ws_title}
+      <!--@if($widgetstyle_extra_var->ws_title_link)-->
+      </a>
+    <!--@end-->
+    <div class="ws_nico_arrow_border"<!--@if($widgetstyle_extra_var->ws_bordercolor)--> style="border-top:10px solid {$widgetstyle_extra_var->ws_bordercolor};"<!--@end-->></div>
+    <div class="ws_nico_arrow_bg" <!--@if($ifColor)-->style="border-top:10px solid {$wColor[1]}"<!--@end-->></div>
+  </div>
+  <div class="ws_nico_content<!--@if($widgetstyle_extra_var->ws_border == 'O')--> ws_nico_border<!--@end-->">
+    {$widget_content}
+  </div>
+</div>

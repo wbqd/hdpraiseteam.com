@@ -1,0 +1,6 @@
+.birthday_table { width: 100%; border-collapse:collapse; }
+.birthday_table th { background: #ebebeb; padding: 2px; font-weight: normal; }
+.birthday_table th .lunar { font-size: 90%; }
+.birthday_table td { text-align: center; padding: 5px; }
+.birthday_table .birthday_member { white-space:nowrap; }
+.birthday_table .birthday_member a { text-decoration: none; color: black; }

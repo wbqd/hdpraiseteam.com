@@ -1,0 +1,23 @@
+<include target="./common_header.html" />
+<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/member/skins/simplestrap/modify_email_address/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+<form ruleset="modifyEmailAddress" action="./" method="post" class="form-horizontal">
+	<input type="hidden" name="module" value="member" />
+	<input type="hidden" name="act" value="procMemberModifyEmailAddress" />
+	<input type="hidden" name="success_return_url" value="{getRequestUriByServerEnviroment()}" />
+	<input type="hidden" name="xe_validator_id" value="modules/member/skins/simplestrap/modify_email_address/1" />
+	<fieldset>
+		<legend>{$lang->cmd_modify_member_email_address} <small>{$lang->about_modify_member_email_address}</small></legend>
+		<div class="form-group">
+			<label for="email_address" class="col-sm-2 control-label" >{$lang->email_address}</label>
+			<div class="col-sm-10">
+				<input type="email" id="email_address" name="email_address" value="" required placeholder="{$lang->email_address}" title="{$lang->email_address}" class="form-control" />
+			</div>
+		</div>
+		<div class="form-actions form-group">
+			<div class="col-sm-10 col-sm-offset-2"><button type="submit" class="btn btn-primary"><span class="icon icon-refresh"></span> {$lang->cmd_send_auth_new_emaill_address}</button></div>
+		</div>
+	</fieldset>
+</form>
+<include target="./common_footer.html" />

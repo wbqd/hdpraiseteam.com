@@ -1,0 +1,33 @@
+<include target="./common_header.html" />
+<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/member/skin/simplestrap/leave_form/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+<form ruleset="leaveMember" id="fo_insert_member" action="./" method="post" class="form-horizontal">
+	<input type="hidden" name="module" value="member" />
+	<input type="hidden" name="act" value="procMemberLeave" />
+    <input type="hidden" name="mid" value="{$mid}" />
+    <input type="hidden" name="document_srl" value="{$document_srl}" />
+    <input type="hidden" name="page" value="{$page}" />
+	<input type="hidden" name="xe_validator_id" value="modules/member/skin/simplestrap/leave_form/1" />
+	<fieldset>
+		<legend>{$member_title = $lang->msg_leave_member}</legend>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">{Context::getLang($identifier)}</label>
+			<div class="col-sm-10">
+				<p class="form-control-static">{$formValue}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="password" class="col-sm-2 control-label">{$lang->password}</label>
+			<div class="col-sm-10">
+				<input type="password" name="password" id="cpw" required placeholder="{$lang->password}" title="{$lang->password}" class="form-control" />
+			</div>
+		</div>
+		<div class="form-actions form-group">
+			<div class="col-sm-10 col-sm-offset-2">
+				<button type="submit" class="btn btn-danger"><span class="icon icon-remove"></span> {$lang->cmd_leave}</button>
+			</div>
+		</div>
+	</fieldset>
+</form>
+<include target="./common_footer.html" />

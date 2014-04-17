@@ -1,0 +1,28 @@
+<!--%import("./css/widget.css")-->
+<table class="birthday_table">
+<!--@foreach($birthday as $no => $val)-->
+    <tr>
+        <th>
+            <!--@if($args->date_type == 'date')-->
+                {$val->solar}<!--@if($val->lunar!='-')--> <span class="lunar">({$val->lunar} <!--@if($val->leap)-->{$lang->leap}<!--@else-->{$lang->no_leap}<!--@end-->)</span><!--@end-->
+            <!--@else-->
+                <!--@if($no == 0)-->
+                    {$lang->today}
+                <!--@else-->
+                    {abs($no)}<!--@if($no < 0)-->{$lang->after}<!--@else-->{$lang->before}<!--@end-->
+                <!--@end-->
+            <!--@end-->
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <!--@foreach($val->member_list as $member)-->
+                <span class="birthday_member">
+                    <a href="#popup_menu_area" class="member_{$member->member_srl}" onclick="return false"><strong>{$member->nick_name}</strong></a>
+                    <!--@if($member->lunar_birthday)-->({$lang->lunar_day})<!--@end-->
+                </span>
+            <!--@end-->
+        </td>
+    </tr>
+<!--@end-->
+</table>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.2">
+    <title xml:lang="ko">WebEngine White</title>
+    <description xml:lang="ko">
+    	WebEngine에서 사용하던 흰색의 깔끔한 레이아웃입니다.
+		레이아웃 자체에서 이미지가 전혀 사용되지 않아 매우 빠른 속도를 느끼실 수 있습니다.
+    </description>
+    
+    <version>1.2</version>
+    <date>2013-12-10</date>
+    
+    <author email_address="gsts007@nvaer.com" link="http://www.webengine.co.kr/">
+        <name xml:lang="ko">WebEngine</name>
+    </author>
+    
+    <extra_vars>
+    	<group>
+	    	<title xml:lang="ko">기본 설정</title>
+	    	<var name="site_url" type="text">
+	    		<title xml:lang="ko">사이트 주소</title>
+	    		<description xml:lang="ko">로고 클릭시 이동할 사이트 주소를 입력합니다.</description>
+	    	</var>
+	    	
+	    	<var name="logo_image" type="image">
+	    		<title xml:lang="ko">사이트 로고</title>
+	    		<description xml:lang="ko">사이트의 로고 이미지를 등록합니다. 미 등록시 [레이아웃 기본 설정 - 사이트 이름]으로 대체됩니다.</description>
+	    	</var>
+	    	
+	    	<var name="site_name" type="text">
+	    		<title xml:lang="ko">사이트 이름</title>
+	    		<description xml:lang="ko">로고의 Alt로 사용 될 사이트 이름을 입력합니다. 미 입력시 "사이트 로고"가 로고의 alt로 사용됩니다.</description>
+	    	</var>
+		</group>
+		
+		<group>
+			<title xml:lang="ko">배너 설정</title>
+	    	<var name="banner_control_visible" type="select">
+	    		<title xml:lang="ko">배너 좌/우 버튼 표시</title>
+	    		<description xml:lang="ko">배너의 좌/우 버튼을 표시할지 표시하지 않을지 선택합니다. (배너 개수가 1개 이하의 경우에도 표시되지 않습니다.)</description>
+				<options value="Y">
+					<title xml:lnag="ko">표시</title>
+					<value>Y</value>
+				</options>
+				<options value="N">
+					<title xml:lnag="ko">표시 안함</title>
+					<value>N</value>
+				</options>
+	    	</var>
+	    	
+	    	<var name="banner_timebar_visible" type="select">
+	    		<title xml:lang="ko">타임바 표시</title>
+	    		<description xml:lang="ko">배너의 하단의 타임바를 표시할지 표시하지 않을지 선택합니다. (배너 개수가 1개 이하의 경우에도 표시되지 않습니다.)</description>
+				<options value="Y">
+					<title xml:lnag="ko">표시</title>
+					<value>Y</value>
+				</options>
+				<options value="N">
+					<title xml:lnag="ko">표시 안함</title>
+					<value>N</value>
+				</options>
+	    	</var>
+    	</group>
+    	
+		<group>
+			<title xml:lang="ko">내용 추가</title>
+	    	<var name="bannertop_content" type="textarea">
+	    		<title xml:lang="ko">배너 상단</title>
+	    		<description xml:lang="ko">사이트 배너 상단에 출력 될 내용을 입력합니다.</description>
+	    	</var>
+			
+	    	<var name="bannerbottom_content" type="textarea">
+	    		<title xml:lang="ko">배너 하단 내용</title>
+	    		<description xml:lang="ko">사이트 배너 하단에 출력 될 내용을 입력합니다.</description>
+	    	</var>
+			
+	    	<var name="mainbottom_content" type="textarea">
+	    		<title xml:lang="ko">컨텐츠 하단 내용</title>
+	    		<description xml:lang="ko">사이트 컨텐츠 하단에 출력 될 내용을 입력합니다.</description>
+	    	</var>
+			
+	    	<var name="foot_content" type="textarea">
+	    		<title xml:lang="ko">푸터 내용</title>
+	    		<description xml:lang="ko">사이트 최하단 좌측에 출력 될 내용을 입력합니다.</description>
+	    	</var>
+			
+	    	<var name="copyright" type="textarea">
+	    		<title xml:lang="ko">카피라이트</title>
+	    		<description xml:lang="ko">사이트 최하단 우측에 출력 될 내용(카피라이트)을 입력합니다.</description>
+	    	</var>
+    	</group>
+    </extra_vars>
+    
+    <menus>
+		<menu name="main_menu" maxdepth="3" default="true">
+			<title xml:lang="ko">메인 메뉴</title>
+		</menu>
+        
+        <menu name="banner_menu" maxdepth="1">
+            <title xml:lang="ko">배너</title>
+        </menu>
+        
+        <menu name="bottom_menu" maxdepth="2">
+            <title xml:lang="ko">하단 메뉴(사이트 맵)</title>
+        </menu>
+    </menus>
+</layout>

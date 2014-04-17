@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget version="0.2">
+    <title xml:lang="ko">생일 출력 위젯</title>
+    <description xml:lang="ko">오늘 기준으로 앞뒤의 생일 회원 목록을 출력해주는 위젯입니다.</description>
+    <version>0.1</version>
+    <date>2010-10-23</date>
+
+    <author email_address="sinsy200@gmail.com" link="http://lunar.xpressengine.net">
+        <name xml:lang="ko">난다날아</name>
+    </author>
+    
+    <extra_vars>
+        <var id="gap">
+            <type>text</type>
+            <name xml:lang="ko">날짜 간격</name>
+            <description xml:lang="ko">오늘 기준으로 앞뒤 며칠까지의 생일을 출력할지를 적어주세요. (기본값 0)</description>
+        </var>
+        <var id="date_type">
+            <type>select</type>
+            <name xml:lang="ko">날짜 표시 형식</name>
+            <options>
+                <value>date</value>
+                <name xml:lang="ko">날짜 표시</name>
+            </options>
+            <options>
+                <value>rel</value>
+                <name xml:lang="ko">상대 일수 표시</name>
+            </options>
+        </var>
+    </extra_vars>
+</widget>

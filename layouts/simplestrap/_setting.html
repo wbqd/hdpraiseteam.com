@@ -1,0 +1,98 @@
+{@
+$li = $layout_info;
+$is_mobile = Mobile::isMobileCheckByAgent() && !$_COOKIE['fakeM'];
+
+if(!$li->custom) $li->custom = array();
+
+Context::addHtmlHeader('<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->');
+Context::set("admin_bar","false");
+if(!$_COOKIE['fakeM']) Context::addHtmlHeader('<meta name="viewport" content="width=device-width, initial-scale=1">');
+}
+<include target="./custom/premium.html" cond="$li->premium=='Y'" /><!--// Layout by Wincomi가 제거되지 않는다면 cond="$li->premium=='Y'" 를 제거해보세요. -->
+{@
+if(!$_program_name) $_program_name = 'simplestrap';
+$_program_version = $li->version;
+
+$cl = $_program_name != 'simplestrap_premium';
+$dl = $ld = "
+	echo '<a href=\"http://www.wincomi.com\" target=\"_blank\"><span class=\"icon icon-exclamation-sign\"></span> L<!--// -->ayout by W<!--// -->incomi</a>';
+";
+if(!$cl) $coml_p = " P";
+$coml = "<!-- Simplestrap".$coml_p." ver ".$_program_version." by Wincomi (http://www.wincomi.com) -->";
+}
+<include target="./custom/custom_setting.html" cond="in_array('custom_setting',$li->custom)" />
+{@
+$colorset = $li->colorset;
+if(!$colorset) $colorset = 'info';
+if(!$li->sb_col) $li->sb_col = "2";
+
+// Context::addBodyClass($colorset);
+switch($colorset):
+	case 'primary':$colorset_cc = "#428bca";break;
+	case 'success':$colorset_cc = "#5cb85c";break;
+	case 'warning':$colorset_cc = "#f0ad4e";break;
+	case 'danger':$colorset_cc = "#d9534f";break;
+	default:$colorset_cc = "#5bc0de";break;
+endswitch;
+if(strpos($act,'dispMember')!==false || strpos($act,'dispCommunication')!==false) $is_member_menu = 'Y';
+if(!$li->jumbotron_align) $li->jumbotron_align = "center";
+
+if($li->site_frame_content):
+	$li->site_frame_content = explode(',',$li->site_frame_content);
+	if(in_array($mid,$li->site_frame_content)/* || $_COOKIE['simplestrap_full_frame']*/) $li->site_frame='content';
+endif;
+if($li->jumbotron_hide_mid):
+	$li->jumbotron_hide_mid = explode(',',$li->jumbotron_hide_mid);
+	if(in_array($mid,$li->jumbotron_hide_mid)) $li->jumbotron = 'N';
+endif;
+}
+<load target="./lang/lang.xml" />
+<block cond="__DEBUG__">
+<load target="./css/bootstrap.css" index="-5"  />
+<block cond="$li->fontawesome!='f4_only'">
+<load target="./css/font-awesome3.css" index="-4"  />
+<load target="./css/font-awesome3-ie7.css" targetie="Ie 7" />
+</block>
+<load target="./css/font-awesome.css" index="-4"  cond="$li->fontawesome!='f3_only'" />
+<load target="./css/simplestrap.css" index="-3" />
+<load target="./js/bootstrap.js" type="body" />
+<!--// load target="js/simplestrap.js" index="-4" type="body"  -->
+</block>
+<block cond="!__DEBUG__">
+<load target="./css/bootstrap.min.css" index="-5"  />
+<block cond="$li->fontawesome!='f4_only'">
+<load target="./css/font-awesome3.min.css" index="-4"  />
+<load target="./css/font-awesome3-ie7.min.css" targetie="ie 7" />
+</block>
+<load target="./css/font-awesome.min.css" index="-4"  cond="$li->fontawesome!='f3_only'" />
+<load target="./css/simplestrap.min.css" index="-3" />
+<load target="./js/bootstrap.min.js" type="body" />
+<!--// load target="./js/simplestrap.min.js" index="-4"  type="body" / -->
+</block>
+<load target="./css/bootstrap-theme.min.css" cond="$li->bootstrap2_design=='Y'" />
+<load target="./css/bootstrap-ie7.css" targetie="ie 7" />
+<load target="./js/jquery.cookie.min.js" />
+<load target="./js/respond.min.js" targetie="lt IE 9" type="body" index="-2" />
+<load target="./js/jquery.placeholder.js" targetie="lt IE 10" type="body" />
+<load target="./js/prettify.js" type="body" cond="$li->code_prettify=='Y'" />
+
+<load target="./custom/custom_style.css" cond="in_array('custom_style',$li->custom)" index="-2" />
+<load target="./custom/custom_js.js" cond="in_array('custom_js',$li->custom)" index="-1" type="body" />
+
+<block cond="$li->css3pie!='Y'">
+	<load target="./js/PIE.js" targetie="lt IE 9" index="0" type="body" />
+	<!--[if lt IE 9]>
+		<style scoped>.btn,.badge,.nav-pills>li>a,.panel{z-index:2;position:relative}</style>
+		<script>
+			jQuery(function($){
+				$(".btn,.badge,.nav-pills>li>a,.panel").each(function(){PIE.attach(this);});
+			});
+		</script>
+	<![endif]-->
+</block>
+<!--[if lt IE 10]>
+<script>jQuery(function($){$('input,textarea').placeholder();});</script>
+<![endif]-->
+
+<script><include target="./js/simplestrap.cond.js" /></script>
+<style><include target="./css/simplestrap.cond.css" /></style>

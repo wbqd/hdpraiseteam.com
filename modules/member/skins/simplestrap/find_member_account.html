@@ -1,0 +1,90 @@
+<include target="./common_header.html" />
+<load target="filter/find_member_account.xml" />
+<section>
+	<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/member/skin/simplestrap/find_member_account/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+		<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+	<form action="./" method="get" onsubmit="return procFilter(this, find_member_account)">
+		<input type="hidden" name="mid" value="{$mid}" />
+		<input type="hidden" name="document_srl" value="{$document_srl}" />
+		<input type="hidden" name="page" value="{$page}" />
+		<input type="hidden" name="xe_validator_id" value="modules/member/skin/simplestrap/find_member_account/1" />
+		<fieldset>
+			<legend>{$lang->cmd_find_member_account_with_email}</legend>
+			<div class="form-group">
+				<input type="email" name="email_address" required placeholder="{$lang->email_address}" title="{$lang->email_address}" class="form-control"/>
+				<p class="help-block">{$lang->about_find_member_account}</p>
+			</div>
+			<div class="form-group text-right">
+				<button type="submit" class="btn btn-primary"><span class="icon icon-ok"></span> {$lang->cmd_find_member_account}</button>
+			</div>
+		</fieldset>
+	</form>
+</section>
+<hr>
+<section cond="count($lang->find_account_question_items)>1">
+	<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/member/skin/simplestrap/find_member_account/2'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+		<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+	<form action="./" method="get" ruleset="@find_member_account_by_question" class="">
+		<input type="hidden" name="module" value="member" />
+		<input type="hidden" name="mid" value="{$mid}" />
+		<input type="hidden" name="document_srl" value="{$document_srl}" />	
+		<input type="hidden" name="act" value="procMemberFindAccountByQuestion" />
+		<input type="hidden" name="success_return_url" value="{getUrl('', 'act', 'dispMemberGetTempPassword')}" />
+		<input type="hidden" name="page" value="{$page}" />
+		<input type="hidden" name="xe_validator_id" value="modules/member/skin/simplestrap/find_member_account/2" />
+		<fieldset>
+			<legend>{$lang->cmd_find_member_account_with_email_question}</legend>
+			<p class="help-block">{$lang->about_find_account_question}</p>
+			<div class="form-group" cond="$identifier == 'user_id'" >
+				<label for="user_id" class="col-2 control-label">{$lang->user_id}</label>
+				<input type="text" name="user_id" required placeholder="{$lang->user_id}" title="{$lang->user_id}" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="user_id" class="col-2 control-label">{$lang->email_address}</label>
+				<input type="email" name="email_address" required placeholder="{$lang->email_address}" title="{$lang->email_address}" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="find_account_answer" class="col-2 control-label">{$lang->find_account_question}</label>
+				<div class="row">
+					<div class="col-sm-4">
+						<select name="find_account_question" class="form-control" style="margin-bottom:10px">
+						<!--@for($i=1,$c=count($lang->find_account_question_items);$i<$c;$i++)-->
+							<option value="{$i}">{$lang->find_account_question_items[$i]}</option>
+						<!--@end-->
+						</select>
+					</div>
+					<div class="col-sm-8">
+						<input type="text" name="find_account_answer" value="" required placeholder="{$lang->find_account_question}" title="{$lang->find_account_question}" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="form-group text-right">
+				<button type="submit" class="btn btn-primary"><span class="icon icon-ok"></span> {$lang->cmd_get_temp_password}</button>
+			</div>
+		</fieldset>
+	</form>
+</section>
+<hr>
+<section>
+	<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/member/skin/simplestrap/find_member_account/3'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+		<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+	<form ruleset="resendAuthMail" action="./" method="post">
+		<input type="hidden" name="module" value="member" />
+		<input type="hidden" name="act" value="procMemberResendAuthMail" />
+		<input type="hidden" name="success_return_url" value="{getUrl(act, $act)}" />
+		<input type="hidden" name="xe_validator_id" value="modules/member/skin/simplestrap/find_member_account/3" />
+		<fieldset>
+			<legend>{$lang->cmd_resend_auth_mail} <small>{$lang->about_resend_auth_mail}</small></legend>
+			<div class="form-group">
+				<input type="email" id="email_address" name="email_address" value="" required placeholder="{$lang->email_address}" title="{$lang->email_address}" class="form-control" />
+			</div>
+			<div class="form-group text-right">
+				<button type="submit" class="btn btn-primary"><span class="icon icon-ok"></span> {$lang->cmd_resend_auth_mail}</button>
+			</div>
+		</fieldset>
+	</form>
+</section>
+<include target="./common_footer.html" />

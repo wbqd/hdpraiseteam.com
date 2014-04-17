@@ -1,0 +1,51 @@
+<include target="./common_header.html" />
+<load target="filter/openid_login.xml" />
+<div style="max-width:300px;margin:auto">
+	<div class="page-header" style="text-align:center;margin-top:0;margin-bottom:10px;font-size:21px;line-height:40px"><h3 style="font-size:18px;margin-bottom:0">{$lang->cmd_login}</h3></div>
+	<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/member/skin/simplestrap/login_form/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+		<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+	<form ruleset="@login" action="./" method="post" id="fo_member_login">
+		<input type="hidden" name="success_return_url" value="{$referer_url}" />
+		<input type="hidden" name="act" value="procMemberLogin" />
+		<input type="hidden" name="xe_validator_id" value="modules/member/skin/default/login_form/1" />
+		<fieldset>
+			<p>
+				<input type="text" cond="$identifier == 'user_id'" name="user_id" id="uid" required placeholder="{$lang->user_id}" class="form-control input-sm" title="{$lang->user_id}" />
+				<input type="email" cond="$identifier != 'user_id'" name="user_id" id="uid" required placeholder="{$lang->email_address}" class="form-control input-sm" title="{$lang->email_address}" />
+			</p>
+			<p>
+				<input type="password" name="password" id="upw" required placeholder="{$lang->password}" title="{$lang->password}" required class="form-control input-sm" />
+			</p>
+			<p>
+				<label for="keepid_opt" style="font-weight:normal">
+					<input type="checkbox" name="keep_signed" id="keepid_opt" value="Y" />
+					{$lang->keep_signed}
+				</label>
+			</p>
+			<p id="warning">{$lang->about_keep_warning}</p>
+			<p>
+				<button type="submit" class="btn btn-primary btn-block btn-sm "><span class="icon icon-ok"></span> {$lang->cmd_login}</button>
+			</p>
+			<div class="btn-group btn-group-justified btn-group-xs">
+				<a href="{getUrl('','act','dispMemberSignUpForm')}" class="btn btn-default">{$lang->cmd_signup}</a>
+				<a href="{getUrl('','act','dispMemberFindAccount')}" class="btn btn-default">{$lang->cmd_find_member_account}</a>
+				<a href="{getUrl('act','dispMemberResendAuthMail')}" class="btn btn-default">{$lang->cmd_resend_auth_mail}</a>
+			</div>
+		</fieldset>
+	</form>
+</div>
+<script>
+jQuery(function($){
+	var keep_msg = $('#warning');
+	keep_msg.hide();
+	$('#keepid_opt').change(function(){
+		if($(this).is(':checked')){
+			keep_msg.slideDown(200);
+		} else {
+			keep_msg.slideUp(200);
+		}
+	});
+});
+</script>
+<include target="./common_footer.html" />

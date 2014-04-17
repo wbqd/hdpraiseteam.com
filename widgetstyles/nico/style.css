@@ -1,0 +1,59 @@
+.ws_nico {
+  padding:0 0 10px 0;
+}
+.ws_nico .ws_nico_title {
+  display:block;
+  line-height:40px;
+  height:40px;
+  background:#f7f7f7;
+  filter:progid:DXImageTransform.Microsoft.gradient(StartColorStr=#ffffff,EndColorStr=#f7f7f7,GradientType=0);
+  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#fff), to(#f7f7f7));
+  background:-webkit-linear-gradient(#fff, #f7f7f7);
+  background:-moz-linear-gradient(#fff, #f7f7f7);
+  background:-ms-linear-gradient(#fff, #f7f7f7);
+  background:-o-linear-gradient(#fff, #f7f7f7);
+  background:linear-gradient(#fff, #f7f7f7);
+  border:1px solid #ddd;
+  border-radius:5px;
+  position:relative;
+  margin:0 0 20px 0;
+  padding:0 0 0 30px;
+  font-weight:bold;
+}
+
+.ws_nico .ws_nico_title a {
+  text-decoration:none;
+  color:#000;
+}
+
+.ws_nico .ws_nico_title .ws_nico_arrow_border,
+.ws_nico .ws_nico_title .ws_nico_arrow_bg  {
+  position:absolute;
+  bottom:-11px;
+  left:20px;
+  width:0;
+  height:0;
+  border:solid transparent;
+  border-width:0 10px;
+  border-top:10px solid #ddd;
+  z-index:2;
+}
+
+.ws_nico .ws_nico_title .ws_nico_arrow_bg {
+  bottom:-10px;
+  border-top:10px solid #f7f7f7;
+  z-index:3;
+}
+
+.ws_nico_content {
+  margin:0 10px;
+  color:#666;
+  line-height:160%;
+}
+
+.ws_nico_border {
+  border:1px solid #ddd;
+  background:#fcfcfc;
+  border-radius:5px;
+  padding:20px;
+}

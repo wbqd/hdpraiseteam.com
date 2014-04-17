@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<lang>
+	<item name="pln_today_event">
+		<value xml:lang="ko"><![CDATA[오늘일정]]></value>
+		<value xml:lang="en"><![CDATA[Today event]]></value>
+		<value xml:lang="jp"><![CDATA[Today event]]></value>
+		<value xml:lang="zh-CN"><![CDATA[Today event]]></value>
+		<value xml:lang="zh-TW"><![CDATA[Today event]]></value>
+		<value xml:lang="fr"><![CDATA[Today event]]></value>
+		<value xml:lang="de"><![CDATA[Today event]]></value>
+		<value xml:lang="ru"><![CDATA[Today event]]></value>
+		<value xml:lang="es"><![CDATA[Today event]]></value>
+		<value xml:lang="tr"><![CDATA[Today event]]></value>
+		<value xml:lang="vi"><![CDATA[Today event]]></value>
+		<value xml:lang="mn"><![CDATA[Today event]]></value>
+	</item>
+	<item name="pln_no_event">
+		<value xml:lang="ko"><![CDATA[등록된 일정이 없습니다.]]></value>
+		<value xml:lang="en"><![CDATA[There are no events registered.]]></value>
+		<value xml:lang="jp"><![CDATA[There are no events registered.]]></value>
+		<value xml:lang="zh-CN"><![CDATA[There are no events registered.]]></value>
+		<value xml:lang="zh-TW"><![CDATA[There are no events registered.]]></value>
+		<value xml:lang="fr"><![CDATA[There are no events registered.]]></value>
+		<value xml:lang="de"><![CDATA[There are no events registered.]]></value>
+		<value xml:lang="ru"><![CDATA[There are no events registered.]]></value>
+		<value xml:lang="es"><![CDATA[There are no events registered.]]></value>
+		<value xml:lang="tr"><![CDATA[There are no events registered.]]></value>
+		<value xml:lang="vi"><![CDATA[There are no events registered.]]></value>
+		<value xml:lang="mn"><![CDATA[There are no events registered.]]></value>
+	</item>
+	<item name="pln_off_day">
+		<value xml:lang="ko"><![CDATA[휴무일]]></value>
+		<value xml:lang="en"><![CDATA[Off day]]></value>
+		<value xml:lang="jp"><![CDATA[Off day]]></value>
+		<value xml:lang="zh-CN"><![CDATA[Off day]]></value>
+		<value xml:lang="zh-TW"><![CDATA[Off day]]></value>
+		<value xml:lang="fr"><![CDATA[Off day]]></value>
+		<value xml:lang="de"><![CDATA[Off day]]></value>
+		<value xml:lang="ru"><![CDATA[Off day]]></value>
+		<value xml:lang="es"><![CDATA[Off day]]></value>
+		<value xml:lang="tr"><![CDATA[Off day]]></value>
+		<value xml:lang="vi"><![CDATA[Off day]]></value>
+		<value xml:lang="mn"><![CDATA[Off day]]></value>
+	</item>
+</lang>

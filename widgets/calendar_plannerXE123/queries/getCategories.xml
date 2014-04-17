@@ -1,0 +1,10 @@
+<query id="getCategories" action="select">
+    <tables>
+        <table name="document_categories" />
+    </tables>
+    <columns>
+        <column name="category_srl" />
+        <column name="title" />
+        <column name="color" />
+    </columns>
+</query>

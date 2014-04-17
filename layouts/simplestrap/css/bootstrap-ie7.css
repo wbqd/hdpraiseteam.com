@@ -1,0 +1,17 @@
+/* .sidebar .panel,.navbar-nav	>li>a,{box-sizing:border-box;behavior:url(../js/boxsizing.htc)} */
+input,textarea{width:100%}
+audio,canvas,video{display:inline;zoom:1}
+html{font-size:100%}
+img{width:auto;height:auto;max-width:100%;vertical-align:middle;-ms-interpolation-mode:bicubic}
+button{overflow:visible}
+.row{zoom:1}
+.dl-horizontal{zoom:1}
+input[type="radio"],input[type="checkbox"]{margin-top:0}
+/* .help-inline{display:inline;zoom:1} */
+.form-horizontal .form-group{zoom:1}
+.table-bordered{border-collapse:collapse}
+.dropdown-toggle{margin-bottom:-3px}
+
+#content,#sidebar{position:static;width:100%}
+.list-inline>li{zoom:1;*display:inline;}
+.nav-pills .badge{display:inline}
