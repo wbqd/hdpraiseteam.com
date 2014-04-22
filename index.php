@@ -36,6 +36,15 @@
  * @brief Declare constants for generic use and for checking to avoid a direct call from the Web
  **/
 define('__XE__',   TRUE);
+
+/**
+ * @로그인 풀림 방지 - 주소 고정하기
+ **/
+preg_match('@^(www\.)(.*)@', $_SERVER['HTTP_HOST'], $www_url);
+if($www_url[1]) {
+@header('Location: http://' . $www_url[2] . $_SERVER['REQUEST_URI']);
+}
+
 /**
  * @brief Include the necessary configuration files
  **/
