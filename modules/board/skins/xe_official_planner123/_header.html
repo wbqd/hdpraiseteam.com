@@ -1,0 +1,119 @@
+<!--@if(!$module_info->colorset)-->
+    {@$module_info->colorset = "white"}
+<!--@end-->
+
+<!--%import("css/board.css")-->
+<!--%import("css/button.css")-->
+<!--%import("css/pagination.css")-->
+<!--@if($module_info->colorset == "black")-->
+	<!--%import("css/black.css")-->
+<!--@else-->
+	<!--%import("css/white.css")-->
+<!--@end-->
+
+<!--// 모바일스킨에서 jquery 작동을 위해 추가함: 모바일 디폴트 스킨 쓰기 앞부분임-->
+<!--@if(mobile::isFromMobilePhone())-->
+{@ $ind_mobile = true }<!--// mobile::isFromMobilePhone() 대신-->
+<!--%import("../default/css/mboard.css")-->
+<!--%import("../default/js/mboard.js")-->
+{@ Context::addJsFile("./common/js/jquery.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/js_app.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/x.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/common.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/xml_handler.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/xml_js_filter.js", true, '', -100000) }
+<!--@else-->
+{@ $ind_mobile = false }
+<!--@endif-->
+<!--// 모바일에서 쓰기가 정상 작동이 안되어 추가함 -->
+
+{@ Context::loadLang($tpl_path."/lang/"); // loadding language pack.}
+
+<!--@if(!$module_info->duration_new = (int)$module_info->duration_new)-->{@ $module_info->duration_new = 12 }<!--@end-->
+<!--@if(!$module_info->content_cut_size = (int)$module_info->content_cut_size)-->{@ $module_info->content_cut_size= 240 }<!--@end-->
+
+<!--@if(!$module_info->thumbnail_type)-->{@ $module_info->thumbnail_type = 'crop'; }<!--@end-->
+<!--@if(!$module_info->thumbnail_width)-->{@ $module_info->thumbnail_width = 100; }<!--@end-->
+<!--@if(!$module_info->thumbnail_height)-->{@ $module_info->thumbnail_height = 100; }<!--@end-->
+
+<!--@if($order_type == "desc")-->
+    {@ $order_icon = "buttonDescending.gif" }
+    {@ $order_type = "asc"; }
+<!--@else-->
+    {@ $order_icon = "buttonAscending.gif" }
+    {@ $order_type = "desc"; }
+<!--@end-->
+
+<!--@if($listStyle=='list')-->
+    {@ $module_info->default_style = 'list'}
+<!--@elseif($listStyle=='planner')-->
+    {@ $module_info->default_style = 'planner'}
+<!--@elseif($listStyle=='planner_list')-->
+    {@ $module_info->default_style = 'planner_list'}
+<!--@elseif($listStyle=='planner_simple')-->
+    {@ $module_info->default_style = 'planner_simple'}
+<!--@elseif($listStyle=='planner_weekly')-->
+    {@ $module_info->default_style = 'planner_weekly'}
+<!--@elseif(!in_array($module_info->default_style,array('list','planner','planner_list','planner_simple','planner_weekly')))-->
+    {@ $module_info->default_style = 'list'}
+<!--@end-->
+
+{$module_info->header_text}
+
+<div class="board">
+    <div class="boardHeader">
+		<!--@if($module_info->title)-->
+		<div class="boardTitle">
+			<h2 class="boardTitleText"><a href="{getUrl('','mid',$mid,'listStyle',$listStyle)}">{$module_info->title}<!--@if($module_info->sub_title)--> : <em>{$module_info->sub_title}</em><!--@end--></a></h2>
+		</div>
+		<!--@end-->
+
+		<!--@if($module_info->comment)-->
+		<p class="boardDescription">{$module_info->comment}</p>
+		<!--@end-->
+    </div>
+
+    <!--@if($module_info->display_setup_button != 'N')-->
+    <div class="boardInformation">
+
+        <!--@if($total_count && $module_info->default_style != 'blog')-->
+        <div class="infoSum">{$lang->document_count} <strong>{number_format($total_count)}</strong></div>
+        <!--@end-->
+
+		<div class="infoView">
+			<ul>
+				<!--@if($grant->manager && $module_info->display_setup_button != 'N')-->
+				  <!--@if($grant->is_admin)-->
+					<!--@if($module_info->module == 'bodex')-->
+					<li class="setup"><a href="{getUrl('act','dispBodexAdminBoardInfo')}" title="{$lang->cmd_setup}"><span>{$lang->cmd_setup}</span></a></li>
+					<!--@else-->
+					<li class="setup"><a href="{getUrl('act','dispBoardAdminBoardInfo')}" title="{$lang->cmd_setup}"><span>{$lang->cmd_setup}</span></a></li>
+					<!--@end-->
+				  <!--@end-->
+				  <li class="listTypeClassic icon<!--@if($module_info->default_style=='list')--> active<!--@end-->"><a href="{getUrl('listStyle','list','act','','document_srl','','device','','extra_vars1','')}" title="Classic Style"><span>Classic Style</span></a></li>
+				<!--@end-->
+				<!--@if($is_logged && $logged_info->member_srl)-->
+			    <li class="icon2"><a href="{getUrl('listStyle','planner_weekly','act','','document_srl','','device','','extra_vars1','','pOption','W2')}" title="planner_weekly"><img src="./img/common/text_editor.gif" border="0" width="16" height="16" /></a></li>
+				<!--@endif-->
+				<!--@if($listStyle != 'planner')--> <!--// 토글을 위해-->
+			        <li class="icon2"><a href="{getUrl('listStyle','planner','act','','document_srl','','device','','extra_vars1','','pOption','M')}" title="Standard"><img src="./img/common/calendar2.gif" border="0" width="16" height="16" /></a></li>
+                <!--@else if($listStyle != 'planner_simple')-->
+                    <li class="icon2"><a href="{getUrl('listStyle','planner_simple','act','','document_srl','','device','','extra_vars1','','pOption','M')}" title="Simple"><img src="./img/common/calendar2.gif" border="0" width="16" height="16" /></a></li>
+                <!--@end-->
+		        <li class="icon2"><a href="{getUrl('listStyle','planner_list','act','','document_srl','','device','','extra_vars1','','pOption','M')}" title="Planner_list"><img src="./img/common/calendar.gif" border="0" width="16" height="16"  /></a></li>
+			    <li class="icon2"><a href="{getUrl('act','','document_srl','','device','','extra_vars1','','pOption','W2')}" title="2weeks"><img src="./img/common/calendar2_week2.gif" border="0" width="16" height="16" /></a></li>
+			    <li class="icon2"><a href="{getUrl('act','','document_srl','','device','','extra_vars1','','pOption','W1')}" title="1week"><img src="./img/common/calendar2_week1.gif" border="0" width="16" height="16" /></a></li>
+			<!--@if(!$ind_mobile)--> <!--// 모바일 아닐때만 -->
+				<!--@if($device == '')-->
+				{@$tmp_size = getUrl('document_srl','','device','big_size','extra_vars1','')}
+				<li class="icon2"><a href="{$tmp_size}" title="big_size"><img src="./img/common/magnify.gif" border="0" width="16" height="16"  /></a></li>
+				<!--@else-->
+				{@$tmp_size = getUrl('document_srl','','device','','extra_vars1','')}
+				<li class="icon2"><a href="{$tmp_size}" title="normal_size"><img src="./img/common/magnify.gif" border="0" width="16" height="16"  /></a></li>
+				<!--@endif-->
+				<li class="icon2"><a href="{getUrl('document_srl','','device','printer','extra_vars1','')}" target="blank" title="Print_screen"><img src="./img/common/printer.gif" border="0" width="16" height="16"  /></a>&nbsp;</li>
+			<!--@endif-->
+			</ul>
+		</div>
+    </div>
+	<!--@end-->
