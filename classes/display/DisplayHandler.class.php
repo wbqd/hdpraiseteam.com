@@ -13,7 +13,7 @@ class DisplayHandler extends Handler
 {
 
 	var $content_size = 0; // /< The size of displaying contents
-	var $gz_enabled = FALSE; // / <a flog variable whether to call contents after compressing by gzip
+	var $gz_enabled = TRUE; // / <a flog variable whether to call contents after compressing by gzip
 	var $handler = NULL;
 
 	/**
