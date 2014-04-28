@@ -57,8 +57,8 @@
             </span>
           </th>
         </block>
-        <th scope="col">
-          <span>Print</span>
+        <th scope="col" cond="$grant->manager">
+          <span>인쇄</span>
         </th>
         <th scope="col" cond="$grant->manager" style="width:44px">
           <span>
@@ -161,7 +161,7 @@
           <td cond="$val->idx!=-1">{$document->getExtraValueHTML($val->idx)}&nbsp;</td>
         </block>
         <!--PRINT-->
-        <td>
+        <td cond="$grant->manager">
           <a href="{getUrl('','module','document','act','dispDocumentPrint','document_srl',$document->document_srl)}" onclick="winopen(this.href);return false;" class="button" target="_blank">
             <span>{$lang->cmd_print}</span>
           </a>
