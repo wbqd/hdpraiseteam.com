@@ -1008,9 +1008,9 @@ class importerAdminController extends importer
 		$started = false;
 		$buff = null;
 
+		$file_obj = new stdClass;
 		while(!feof($fp))
 		{
-			$file_obj = new stdClass;
 			$str = trim(fgets($fp, 1024));
 			// If it ends with </attaches>, break
 			if(trim($str) == '</attaches>') break;
