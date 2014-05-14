@@ -58,7 +58,7 @@
 		<value xml:lang="vi"><![CDATA[Xin hãy nhập địa chỉ sẽ trả lời khi kiểm tra Zip Code]]></value>
 	</item>
 	<item name="about_kr_address_detail">
-		<value xml:lang="ko"><![CDATA[검색방법<br>1. 동/리와 지번을 검색하세요 예) 영평동 2181<br>2. 건물명으로 검색하세요 예) XE빌딩<br>3. 도로명으로 검색하세요 예) 첨단로 242]]></value>
+		<value xml:lang="ko"><![CDATA[검색방법<br>1. 동/리와 지번을 검색하세요 예) 영평동 2181<br>2. 건물명(아파트명, 빌라명)으로 검색하세요 예) XE빌딩<br>3. 도로명으로 검색하세요 예) 첨단로 242]]></value>
 	</item>
 	<item name="msg_not_exists_addr">
 		<value xml:lang="ko"><![CDATA[검색하려는 대상이 없습니다.]]></value>
@@ -100,6 +100,6 @@
 		<value xml:lang="ko"><![CDATA[시/군/구를 선택하세요.]]></value>
 	</item>
 	<item name="cmd_kr_address_etc">
-		<value xml:lang="ko"><![CDATA[나머지주소가 있을 경우 나머지주소를 입력하세요.]]></value>
+		<value xml:lang="ko"><![CDATA[나머지주소를 입력하세요.]]></value>
 	</item>
 </lang>

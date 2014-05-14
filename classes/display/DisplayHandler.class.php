@@ -13,7 +13,7 @@ class DisplayHandler extends Handler
 {
 
 	var $content_size = 0; // /< The size of displaying contents
-	var $gz_enabled = TRUE; // / <a flog variable whether to call contents after compressing by gzip
+	var $gz_enabled = FALSE; // / <a flog variable whether to call contents after compressing by gzip
 	var $handler = NULL;
 
 	/**
@@ -164,12 +164,13 @@ class DisplayHandler extends Handler
 						array(
 							'Request / Response info >>> ' . $_SERVER['REQUEST_METHOD'] . ' / ' . Context::getResponseMethod(),
 							array(
-								array('Request URI', 'Request method', 'Response method', 'Response contents size'),
+								array('Request URI', 'Request method', 'Response method', 'Response contents size', 'Memory peak usage'),
 								array(
 									sprintf("%s:%s%s%s%s", $_SERVER['SERVER_NAME'], $_SERVER['SERVER_PORT'], $_SERVER['PHP_SELF'], $_SERVER['QUERY_STRING'] ? '?' : '', $_SERVER['QUERY_STRING']),
 									$_SERVER['REQUEST_METHOD'],
 									Context::getResponseMethod(),
-									$this->content_size . ' byte'
+									$this->content_size . ' byte',
+									FileHandler::filesize(memory_get_peak_usage())
 								)
 							)
 						),

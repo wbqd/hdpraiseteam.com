@@ -44,7 +44,10 @@
 
 		// 주소창 클릭
 		ui.currentAddress.focus(function() {
-			if(step == STEP_INIT || step == STEP_COMPLETE) goStep1();
+			if(step == STEP_INIT || step == STEP_COMPLETE){
+				ui.currentAddress.val('');
+				goStep1();
+			}
 		});
 		
 		// 삭제버튼 클릭
@@ -56,6 +59,8 @@
 		
 		// 취소버튼 클릭
 		ui.cancelButton.click(function(){
+			ui.addrFirst.val(ui.addrFirst.data('originValue'));
+			ui.addrSecond.val(ui.addrSecond.data('originValue'));
 			ui.currentAddress.val(ui.addrFirst.val() + ' ' + ui.addrSecond.val());
 			goStep0();
 		});
@@ -87,6 +92,8 @@
 		
 		// 상세주소(addr3)를 선택
 		ui.addr3selector.on('click', 'table button.sel_detail', 'click', function(){
+			ui.addrSecond.val('');
+			ui.addrSecond.focus();
 			goStep5($(this).closest('tr').find('td:first span').text(),$(this).closest('tr').find('td:eq(1)').text());
 			return false;
 		});
@@ -96,18 +103,10 @@
 			goStep4();
 			return false;
 		});
-		
-		// 나머지주소(addr4) 입력후 [완료]버튼을 클릭
-		ui.addr4input.find('button.submit_addr4').click(function(){
-			var input = ui.addr4input.find('.addr4_input').val();
-			goStep6(input);
-			return false;
-		});
-		// 나머지주소(addr4) 입력후 '엔터'
-		ui.addr4input.find('input.addr4_input').keypress(function(event){
-			if(event.keyCode!=13) return;
-			ui.addr4input.find('button.submit_addr4').click();
-			return false;
+
+		// 나머지주소(addr4) 입력후 '엔터' 방지
+		ui.addrSecond.keypress(function(event){
+			if(event.keyCode==13) return false;
 		});
 
 		var setIndicator = function() {
@@ -260,7 +259,8 @@
 
 			// validate addr3
 			if (arguments.length) {
-				new_addr_first = arguments[0] + ' ('+ arguments[1] + ') '; 
+				new_addr_first = arguments[0] + ' ('+ arguments[1] + ') ';
+				ui.addrFirst.val(new_addr_first);
 			}
 			
 			setIndicator();
